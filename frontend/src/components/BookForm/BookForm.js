@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux'; 
-import { addBook } from '../../redux/slices/booksSlice';
+import { useDispatch } from 'react-redux';
+import { addBook, thunkFunction } from '../../redux/slices/booksSlice';
 import createBookWithID from '../../utils/creataBookWithID';
 import booksData from '../../data/books.json'
 import './BookForm.css'
@@ -14,18 +14,22 @@ const BookForm = () => {
         const randomIndex = Math.floor(Math.random() * booksData.length)
         const randomBook = booksData[randomIndex]
 
-        dispatch(addBook(createBookWithID(randomBook)))
+        dispatch(addBook(createBookWithID(randomBook, 'random')))
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
         if(title && author) {
-            dispatch(addBook(createBookWithID({title, author})))
+            dispatch(addBook(createBookWithID({title, author}, 'manual')))
 
             setTitle('')
             setAuthor('')
         }
+    }
+
+    const handleAddRandomBookViaAPI = async () => {
+       dispatch(thunkFunction )
     }
     return (
         <div className="app-block book-form">
@@ -42,6 +46,7 @@ const BookForm = () => {
 
                 <button type="submit">Add Book</button>
                 <button type="button" onClick={handleAddRandomBook}>Add Random</button>
+                <button type="button" onClick={handleAddRandomBookViaAPI}>Add Random via API</button>
             </form>
         </div>
     )

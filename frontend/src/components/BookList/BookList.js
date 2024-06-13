@@ -40,6 +40,7 @@ const BookList = () => {
             }
             return substring
         })
+        
     }
 
     return (
@@ -52,7 +53,7 @@ const BookList = () => {
                     {filteredBooks.map((book, i) => (
                         <li key={book.id}>
                             <div className="book-info">
-                               {++i}. {highlightMatch(book.title, titleFilter)} by <strong>{highlightMatch(book.author, authorFilter)}</strong>
+                               {++i}. {highlightMatch(book.title, titleFilter)} by <strong>{highlightMatch(book.author, authorFilter)}</strong> ({book.sourse})
                             </div>
                             <div className="book-actions">
                                 <span onClick={() => handleToggleFavorite(book.id)}>
